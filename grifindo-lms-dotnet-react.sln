@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backend", "backend", "{082BE963-E039-4CEC-853C-77363F41AB97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "grifindo-lms-api", "backend\grifindo-lms-api\grifindo-lms-api.csproj", "{8B5F8A16-0146-4DF7-947D-21FD06AC8B0E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "grifindo-lms-api", "backend\grifindo-lms-api.csproj", "{8037090B-22C6-4AC6-BC93-A5D6106F2547}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +20,10 @@ Global
 		{8B5F8A16-0146-4DF7-947D-21FD06AC8B0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B5F8A16-0146-4DF7-947D-21FD06AC8B0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B5F8A16-0146-4DF7-947D-21FD06AC8B0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8037090B-22C6-4AC6-BC93-A5D6106F2547}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8037090B-22C6-4AC6-BC93-A5D6106F2547}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8037090B-22C6-4AC6-BC93-A5D6106F2547}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8037090B-22C6-4AC6-BC93-A5D6106F2547}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8B5F8A16-0146-4DF7-947D-21FD06AC8B0E} = {082BE963-E039-4CEC-853C-77363F41AB97}
