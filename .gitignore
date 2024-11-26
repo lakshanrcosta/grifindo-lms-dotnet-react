@@ -1,0 +1,62 @@
+# General
+.DS_Store
+Thumbs.db
+
+# Node.js (Frontend)
+frontend/node_modules/
+frontend/build/
+frontend/dist/
+frontend/.env
+frontend/.cache/
+frontend/coverage/
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+# ASP.NET Core (Backend)
+backend/bin/
+backend/obj/
+backend/appsettings.Development.json
+backend/appsettings.*.json
+backend/*.user
+backend/*.suo
+backend/*.vspscc
+backend/*.vssscc
+backend/.vs/
+backend/*.log
+backend/*.pid
+backend/wwwroot/
+
+# Docker
+docker-compose.override.yml
+*.env
+*.tmp
+
+# Logs
+*.log
+logs/
+*.pid
+*.seed
+
+# IDE Specific
+.vscode/
+.idea/
+*.sln.docstates
+
+# OS generated files
+*.swp
+*.lock
+*.pyc
+*.pyo
+*.sqlite
+*.tmp
+*.bak
+
+# Others
+coverage/
+__pycache__/
+*.iml
+*.temp
+npm-debug.log*
+.yarn-debug.log*
+.yarn-error.log*
