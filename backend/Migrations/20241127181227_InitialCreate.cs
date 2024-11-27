@@ -78,6 +78,28 @@ namespace grifindo_lms_api.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "WorkSchedules",
+                columns: table => new
+                {
+                    ScheduleId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    RoasterStartTime = table.Column<TimeSpan>(type: "time", nullable: false),
+                    RoasterEndTime = table.Column<TimeSpan>(type: "time", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WorkSchedules", x => x.ScheduleId);
+                    table.ForeignKey(
+                        name: "FK_WorkSchedules_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "UserId", "DateOfJoining", "Email", "EmployeeNumber", "IsPermanent", "Name", "Password", "Role" },
@@ -96,6 +118,11 @@ namespace grifindo_lms_api.Migrations
                 name: "IX_Leaves_UserId",
                 table: "Leaves",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkSchedules_UserId",
+                table: "WorkSchedules",
+                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -106,6 +133,9 @@ namespace grifindo_lms_api.Migrations
 
             migrationBuilder.DropTable(
                 name: "Leaves");
+
+            migrationBuilder.DropTable(
+                name: "WorkSchedules");
 
             migrationBuilder.DropTable(
                 name: "Users");

@@ -14,12 +14,12 @@ namespace grifindo_lms_api.Services
         private static readonly string Issuer = Environment.GetEnvironmentVariable("JWT_ISSUER")
             ?? throw new ArgumentNullException("Environment variable 'JWT_ISSUER' is not set.");
 
-        public static string GenerateToken(string employeeNumber, string role, int expireMinutes = 60)
+        public static string GenerateToken(int userId, string role, int expireMinutes = 60)
         {
             // Add claims, including the user's role
             var claims = new[]
             {
-                new Claim(ClaimTypes.Name, employeeNumber),
+                new Claim("userId", userId.ToString()),
                 new Claim(ClaimTypes.Role, role),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };

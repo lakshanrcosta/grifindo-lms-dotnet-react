@@ -12,7 +12,7 @@ using grifindo_lms_api.Data;
 namespace grifindo_lms_api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241126161226_InitialCreate")]
+    [Migration("20241127181227_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -154,6 +154,33 @@ namespace grifindo_lms_api.Migrations
                         });
                 });
 
+            modelBuilder.Entity("grifindo_lms_api.Models.WorkSchedule", b =>
+                {
+                    b.Property<int>("ScheduleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ScheduleId"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<TimeSpan>("RoasterEndTime")
+                        .HasColumnType("time");
+
+                    b.Property<TimeSpan>("RoasterStartTime")
+                        .HasColumnType("time");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ScheduleId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("WorkSchedules");
+                });
+
             modelBuilder.Entity("grifindo_lms_api.Models.Leave", b =>
                 {
                     b.HasOne("grifindo_lms_api.Models.User", "User")
@@ -166,6 +193,17 @@ namespace grifindo_lms_api.Migrations
                 });
 
             modelBuilder.Entity("grifindo_lms_api.Models.LeaveEntitlement", b =>
+                {
+                    b.HasOne("grifindo_lms_api.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("grifindo_lms_api.Models.WorkSchedule", b =>
                 {
                     b.HasOne("grifindo_lms_api.Models.User", "User")
                         .WithMany()

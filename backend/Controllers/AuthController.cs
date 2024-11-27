@@ -2,6 +2,7 @@ using grifindo_lms_api.Data;
 using grifindo_lms_api.Dtos;
 using grifindo_lms_api.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -28,7 +29,7 @@ namespace grifindo_lms_api.Controllers
                 return Unauthorized(new { message = "Invalid credentials" });
             }
 
-            var token = JwtTokenService.GenerateToken(request.EmployeeNumber, user.Role.ToString());
+            var token = JwtTokenService.GenerateToken(user.UserId, user.Role.ToString());
 
             var cookieOptions = new CookieOptions
             {
@@ -40,8 +41,25 @@ namespace grifindo_lms_api.Controllers
 
             Response.Cookies.Append("auth_token", token, cookieOptions);
 
-            return Ok(new { role = user.Role.ToString(), message = "Login successful" });
+            return Ok(new { role = user.Role.ToString(), userId = user.UserId, userName = user.Name, message = "Login successful" });
         }
+
+        [HttpPost("logout")]
+        [Authorize] // Ensure the user is authenticated
+        public IActionResult Logout()
+        {
+            // Clear the authentication token cookie
+            Response.Cookies.Append("auth_token", string.Empty, new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Strict,
+                Expires = DateTime.UtcNow.AddDays(-1) // Set the cookie expiry to a past date
+            });
+
+            return Ok(new { message = "Logout successful" });
+        }
+
 
         private static bool VerifyPassword(string inputPassword, string storedHash)
         {

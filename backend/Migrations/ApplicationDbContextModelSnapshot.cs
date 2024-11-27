@@ -159,6 +159,9 @@ namespace grifindo_lms_api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ScheduleId"));
 
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
                     b.Property<TimeSpan>("RoasterEndTime")
                         .HasColumnType("time");
 
