@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace grifindo_lms_api.Migrations
 {
     /// <inheritdoc />
@@ -74,6 +76,15 @@ namespace grifindo_lms_api.Migrations
                         principalTable: "Users",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "UserId", "DateOfJoining", "Email", "EmployeeNumber", "IsPermanent", "Name", "Password", "Role" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@example.com", "EMP001", true, "Admin User", "BTl6fVG9nj7zanzlEq7o6jpgN7oxfvVZ71L+bUZZhsA=", "Admin" },
+                    { 2, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "employee@example.com", "EMP002", true, "Employee User", "BTl6fVG9nj7zanzlEq7o6jpgN7oxfvVZ71L+bUZZhsA=", "Employee" }
                 });
 
             migrationBuilder.CreateIndex(
