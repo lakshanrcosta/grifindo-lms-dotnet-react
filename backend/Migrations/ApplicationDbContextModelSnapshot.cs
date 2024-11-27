@@ -125,6 +125,57 @@ namespace grifindo_lms_api.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            DateOfJoining = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "admin@example.com",
+                            EmployeeNumber = "EMP001",
+                            IsPermanent = true,
+                            Name = "Admin User",
+                            Password = "BTl6fVG9nj7zanzlEq7o6jpgN7oxfvVZ71L+bUZZhsA=",
+                            Role = "Admin"
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            DateOfJoining = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "employee@example.com",
+                            EmployeeNumber = "EMP002",
+                            IsPermanent = true,
+                            Name = "Employee User",
+                            Password = "BTl6fVG9nj7zanzlEq7o6jpgN7oxfvVZ71L+bUZZhsA=",
+                            Role = "Employee"
+                        });
+                });
+
+            modelBuilder.Entity("grifindo_lms_api.Models.WorkSchedule", b =>
+                {
+                    b.Property<int>("ScheduleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ScheduleId"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<TimeSpan>("RoasterEndTime")
+                        .HasColumnType("time");
+
+                    b.Property<TimeSpan>("RoasterStartTime")
+                        .HasColumnType("time");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ScheduleId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("WorkSchedules");
                 });
 
             modelBuilder.Entity("grifindo_lms_api.Models.Leave", b =>
@@ -139,6 +190,17 @@ namespace grifindo_lms_api.Migrations
                 });
 
             modelBuilder.Entity("grifindo_lms_api.Models.LeaveEntitlement", b =>
+                {
+                    b.HasOne("grifindo_lms_api.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("grifindo_lms_api.Models.WorkSchedule", b =>
                 {
                     b.HasOne("grifindo_lms_api.Models.User", "User")
                         .WithMany()

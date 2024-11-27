@@ -5,9 +5,12 @@ services:
       context: .
       dockerfile: backend/Dockerfile
     ports:
-      - "5000:5000"
+      - "8080:5000"
     volumes:
       - ./backend:/src:delegated # Mount backend code for dev only
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      ConnectionStrings__DefaultConnection: "Server=mssql;Database=${MSSQL_DATABASE};User=${MSSQL_USER};Password=${MSSQL_PASSWORD};TrustServerCertificate=True;"
     env_file:
       - .env
     depends_on:

@@ -10,6 +10,7 @@ namespace grifindo_lms_api.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Leave> Leaves { get; set; }
         public DbSet<LeaveEntitlement> LeaveEntitlements { get; set; }
+        public DbSet<WorkSchedule> WorkSchedules { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,6 +27,8 @@ namespace grifindo_lms_api.Data
             modelBuilder.Entity<Leave>()
                 .Property(l => l.Status)
                 .HasConversion<string>();
+
+            SeedData.Seed(modelBuilder);
         }
     }
 }
